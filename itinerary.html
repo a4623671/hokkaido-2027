@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道10天行程初稿（晴／暴風雪備案＋Tomamu五晚）</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#eef3f7;color:#2b2b2b;line-height:1.6}
+.topbar{background:#fff;border-bottom:1px solid #d8e0e8;padding:10px 12px;display:flex;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;position:sticky;top:0;z-index:10}
+.topbar::-webkit-scrollbar{display:none}
+.topbar .logo{font-weight:800;font-size:16px;white-space:nowrap;flex:none}
+.topbar>a{flex:none;white-space:nowrap;color:#0b2a4a;text-decoration:none;font-weight:700;font-size:14px}
+.topbar .sp{flex:1;min-width:2px}
+.topbar button{border:1px solid #d8e0e8;background:#fff;border-radius:20px;padding:6px 12px;font-size:14px;cursor:pointer;flex:none;white-space:nowrap}
+.hero{background:linear-gradient(135deg,#0b2a4a,#1b6f9e);color:#fff;padding:18px 16px}
+.hero h1{font-size:20px;margin-bottom:4px}.hero .meta{font-size:14px;opacity:.92}
+.hero .warn{margin-top:10px;background:#fff3d6;color:#7a5200;border-radius:10px;padding:8px 12px;font-size:13px}
+.nowline{margin-top:10px;background:#0b2a4a;color:#ffe9b0;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:700}
+.days{display:flex;gap:8px;padding:10px 12px;background:#fff;border-bottom:1px solid #d8e0e8;overflow-x:auto;position:sticky;top:51px;z-index:9}
+.day{flex:none;border:1px solid #d8e0e8;border-radius:16px;padding:6px 12px;font-size:13px;background:#fff;cursor:pointer;text-align:center}
+.day small{display:block;font-size:11px;color:#888}.day.on{background:#0b2a4a;color:#fff;border-color:#0b2a4a;font-weight:700}.day.on small{color:#cfe0ee}
+.abrow{display:none;gap:8px;padding:10px 12px 0}.abrow.on{display:flex}
+.ab{flex:1;border:1px solid #d8e0e8;border-radius:20px;padding:7px;font-size:14px;background:#fff;cursor:pointer}
+.ab.on{background:#b3541e;color:#fff;border-color:#b3541e;font-weight:700}
+.plan{display:none;padding:10px 12px 90px}.plan.on{display:block}
+.desc{background:#fff;border:1px dashed #9db8d2;border-radius:12px;padding:10px 14px;margin:10px 0 12px;font-size:14px}
+.wxband{background:linear-gradient(135deg,#0ea5e9,#1d4ed8);color:#fff;border-radius:12px;padding:10px 14px;margin:0 0 10px;font-size:13px;font-weight:700}
+.tl{position:relative;margin-left:8px;padding-left:22px;border-left:2px dotted #9db8d2}
+.stop{background:#fff;border-radius:12px;padding:10px 12px;margin:0 0 10px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.stop .row1{display:flex;align-items:center;gap:8px}
+.stop .time{font-weight:800;font-size:14px;white-space:nowrap}
+.badge{font-size:12px;border-radius:6px;padding:1px 8px;white-space:nowrap}
+.b-spot{background:#e3f2e4;color:#1e7a34}.b-food{background:#fdf0d5;color:#9a6200}
+.b-trans{background:#fde8e4;color:#b3402a}.b-hotel{background:#e2e8f0;color:#33415c}
+.b-shop{background:#e8e4f8;color:#5b4a9e}
+.stop h3{font-size:16px;margin:4px 0 2px}.stop .sub{font-size:13px;color:#666}
+.stop .dur{margin-left:auto;font-size:13px;font-weight:700;color:#b3541e;white-space:nowrap}
+.stop .detail{display:none;font-size:13px;background:#faf7ef;border-radius:8px;padding:8px 10px;margin-top:8px}
+.stop.open .detail{display:block}
+.ibtn{border:none;background:#e8dfc8;width:26px;height:26px;border-radius:50%;font-style:italic;font-weight:800;cursor:pointer;flex:none}
+.pick{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px}
+.pick input{width:18px;height:18px;accent-color:#0e6e5a}
+.summary{position:fixed;left:0;right:0;bottom:0;background:#0b2a4a;color:#fff;padding:10px 14px;display:flex;gap:10px;align-items:center;font-size:14px;z-index:20}
+.summary .grow{flex:1}.summary button{border:none;border-radius:20px;padding:8px 16px;font-weight:700;cursor:pointer}
+#btnCopy{background:#ffcf4d}#btnPrint{background:#fff}
+.sheet{display:none;background:#fff;color:#222;border-radius:14px;padding:14px;margin:12px;font-size:14px}
+.sheet.on{display:block}.sheet li{margin:4px 0 4px 18px}
+.note{font-size:12px;color:#888;margin:10px 2px}
+@media print{.topbar,.days,.abrow,.summary,.pick,.ibtn{display:none}.plan{display:block}}
+#nowtoast{position:fixed;left:12px;right:12px;bottom:140px;z-index:60;display:none;background:#0b2a4a;color:#fff;border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;text-align:center}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="logo">❄️ 行程</div><a href="index.html">‹ 返回入口</a><div class="sp"></div><button onclick="window.print()">🖨 列印</button></div>
+<div class="hero">
+<h1>2027 北海道冬旅・10天9夜初稿</h1>
+<div class="meta">02/12桃園→新千歲 → 札幌 → 02/14–02/19 Tomamu(5晚) → 登別 → 02/21返台・5大人</div>
+<div class="nowline" id="nowline">⌛ 讀取行程狀態…</div>
+<div class="warn">⚠️ Tomamu RISONARE 5晚已訂（¥1,067,750・不可取消・含早餐・15:00入/11:00退）。雪祭/雪燈2027檔期未公告，出發前複查。暴風雪JR運休常見，包車/租車優先。</div>
+</div>
+<div class="days">
+<button class="day on" onclick="swDay(0,this)">02/12<small>抵達札幌</small></button>
+<button class="day" onclick="swDay(1,this)">02/13<small>札幌小樽</small></button>
+<button class="day" onclick="swDay(2,this)">02/14<small>進Tomamu</small></button>
+<button class="day" onclick="swDay(3,this)">02/15<small>富良野</small></button>
+<button class="day" onclick="swDay(4,this)">02/16<small>旭川</small></button>
+<button class="day" onclick="swDay(5,this)">02/17<small>美瑛</small></button>
+<button class="day" onclick="swDay(6,this)">02/18<small>Tomamu</small></button>
+<button class="day" onclick="swDay(7,this)">02/19<small>登別</small></button>
+<button class="day" onclick="swDay(8,this)">02/20<small>返札幌</small></button>
+<button class="day" onclick="swDay(9,this)">02/21<small>返台</small></button>
+</div>
+
+<div class="abrow" id="ab0"></div>
+<div class="plan on" id="day0">
+<div class="wxband">🌤 札幌 02-12 天氣：預報尚未發布（出發前14天自動顯示）<br><small>2月均溫約-8～-3°C，防滑＋保暖</small></div>
+<div class="desc">D1：桃園→新千歲→札幌。首晚薄野＋狸小路，時差無，重點是吃飽早睡。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">午後</span><span class="badge b-trans">交通</span></div><h3>✈️ 抵達新千歲→札幌市區</h3><div class="sub">JR快速エアポート約40分／包車直送</div><div class="pick"><input type="checkbox" data-t="0" checked disabled><span>固定行程</span></div></div>
+<div class="stop"><div class="row1"><span class="time">18:00–21:00</span><span class="badge b-food">晚餐</span><button class="ibtn" onclick="this.closest('.stop').classList.toggle('open')">i</button></div><h3>🍜 薄野＋狸小路（達摩成吉思汗／湯咖哩）</h3><div class="sub">5大人聚餐先訂位</div><div class="dur">3小時</div><div class="detail">達摩本店排隊名物；Suage＋奧芝商店二選一當備案。</div><div class="pick"><input type="checkbox" data-t="180" data-n="D1 薄野晚餐" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow on" id="ab1" style="display:none"><button class="ab on" onclick="swPlan(1,'A',this)">☀️ A・小樽雪燈</button><button class="ab" onclick="swPlan(1,'B',this)">❄️ B・市區備案</button></div>
+<div class="plan" id="day1A">
+<div class="wxband">🌤 小樽 02-13 天氣：預報尚未發布（出發前14天自動顯示）</div>
+<div class="desc">D2A：札幌→小樽（JR約45分）。雪燈之路檔期待查，若無點燈則運河日景＋堺町照走。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">09:00–12:00</span><span class="badge b-spot">景點</span></div><h3>🏭 小樽運河＋堺町通</h3><div class="sub">六花亭/北菓樓/音樂盒堂，伴手禮第一站</div><div class="dur">3小時</div><div class="pick"><input type="checkbox" data-t="180" data-n="D2 堺町通" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">12:00–13:30</span><span class="badge b-food">午餐</span></div><h3>🍣 小樽海鮮丼（滝波食堂／三角市場）</h3><div class="sub">政壽司備選，5位建議預約</div><div class="dur">1小時30分</div><div class="pick"><input type="checkbox" data-t="90" data-n="D2 小樽午餐" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">16:00–18:00</span><span class="badge b-spot">夜景</span></div><h3>🕯 雪燈之路＋運河夜景</h3><div class="sub">檔期未定，有燈賺到、無燈看運河瓦斯燈</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D2 雪燈之路" checked><span>加入我的初稿</span></div></div>
+</div></div>
+<div class="plan" id="day1B">
+<div class="desc">D2B：暴風雪／JR運休備案，全札幌市區。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">10:00–12:30</span><span class="badge b-spot">室內</span></div><h3>🍫 白色戀人公園</h3><div class="sub">見學＋體驗＋限定甜點</div><div class="dur">2小時30分</div><div class="pick"><input type="checkbox" data-t="150" data-n="D2B 白色戀人" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">17:00–19:00</span><span class="badge b-spot">夜景</span></div><h3>🌃 藻岩山夜景＋札幌啤酒園晚餐</h3><div class="sub">纜車看天氣開駛</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D2B 藻岩山" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab2"></div>
+<div class="plan" id="day2">
+<div class="desc">D3：札幌→Tomamu移動日。15:00 RISONARE入住，晚上冰村先探路。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">09:00–13:00</span><span class="badge b-trans">移動</span></div><h3>🚗 札幌→Tomamu（約2.5小時）</h3><div class="sub">包車/租車經道東道；JR南千歲轉乘＋接駁備案</div><div class="pick"><input type="checkbox" data-t="0" checked disabled><span>固定行程</span></div></div>
+<div class="stop"><div class="row1"><span class="time">15:00</span><span class="badge b-hotel">入住</span></div><h3>🏨 RISONARE Tomamu（5晚）</h3><div class="sub">¥1,067,750・含早餐・不可取消・11:00退房(02/19)</div><div class="pick"><input type="checkbox" data-t="0" checked disabled><span>固定行程</span></div></div>
+<div class="stop"><div class="row1"><span class="time">17:00–20:00</span><span class="badge b-spot">夜遊</span></div><h3>🧊 愛絲冰城（Ice Village）</h3><div class="sub">冰教堂/冰酒吧/冰旅館，-10°C體驗約2小時</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D3 冰村" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab3" style="display:none"><button class="ab on" onclick="swPlan(3,'A',this)">☀️ A・富良野日歸</button><button class="ab" onclick="swPlan(3,'B',this)">❄️ B・場內日</button></div>
+<div class="plan" id="day3A">
+<div class="desc">D4A：Tomamu→富良野（約1小時）。精靈露台夜燈是重點，回程注意夜路。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">10:00–12:00</span><span class="badge b-food">午餐</span></div><h3>🍛 唯我獨尊咖哩＋富田農場</h3><div class="sub">自家烘焙咖哩；冬季農場雪景＋乾花舍</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D4 富田＋咖哩" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">16:00–18:00</span><span class="badge b-spot">夜景</span></div><h3>🌲 精靈露台點燈</h3><div class="sub">15棟小木屋＋咖啡，待到點燈再走</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D4 精靈露台" checked><span>加入我的初稿</span></div></div>
+</div></div>
+<div class="plan" id="day3B">
+<div class="desc">D4B：暴風雪備案，Tomamu場內全日。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">全日</span><span class="badge b-spot">場內</span></div><h3>⛷ 滑雪＋霧冰平台＋微笑海灘＋Animate Hall</h3><div class="sub">霧冰纜車看風速開驶，微笑海灘30°C泳池反差</div><div class="dur">全日</div><div class="pick"><input type="checkbox" data-t="360" data-n="D4B 場內全日" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab4" style="display:none"><button class="ab on" onclick="swPlan(4,'A',this)">☀️ A・旭川日歸</button><button class="ab" onclick="swPlan(4,'B',this)">❄️ B・場內日</button></div>
+<div class="plan" id="day4A">
+<div class="desc">D5A：Tomamu→旭川（約2小時）。企鵝散步11:00/14:30，務必先對時間。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">11:00–14:00</span><span class="badge b-spot">動物園</span></div><h3>🐧 旭山動物園（企鵝散步＋北極熊）</h3><div class="sub">冬季重點，企鵝散步兩場</div><div class="dur">3小時</div><div class="pick"><input type="checkbox" data-t="180" data-n="D5 旭山動物園" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">14:30–16:00</span><span class="badge b-food">午餐兼點心</span></div><h3>🍜 旭川拉麵村＋男山酒造</h3><div class="sub">青葉/山頭火系＋清酒試飲（駕駛禁酒）</div><div class="dur">1小時30分</div><div class="pick"><input type="checkbox" data-t="90" data-n="D5 拉麵村" checked><span>加入我的初稿</span></div></div>
+</div></div>
+<div class="plan" id="day4B">
+<div class="desc">D4B：暴風雪備案，場內滑雪＋冰村重遊。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">全日</span><span class="badge b-spot">場內</span></div><h3>⛷ 滑雪日＋夜間冰村</h3><div class="sub">裝備租借＋課程先預約</div><div class="dur">全日</div><div class="pick"><input type="checkbox" data-t="360" data-n="D5B 滑雪日" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab5" style="display:none"><button class="ab on" onclick="swPlan(5,'A',this)">☀️ A・美瑛日歸</button><button class="ab" onclick="swPlan(5,'B',this)">❄️ B・場內日</button></div>
+<div class="plan" id="day5A">
+<div class="desc">D6A：Tomamu→美瑛（約1.5小時）。青池冬季點燈＋拼布之路，自駕注意路面黑冰。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">10:00–12:00</span><span class="badge b-spot">景點</span></div><h3>💙 美瑛青池＋白鬚瀑布</h3><div class="sub">雪中青池＋結冰瀑布</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D6 青池" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">13:00–15:30</span><span class="badge b-spot">體驗</span></div><h3>🛷 四季彩之丘雪上活動</h3><div class="sub">雪上車/香蕉船/雪筏，多人分攤</div><div class="dur">2小時30分</div><div class="pick"><input type="checkbox" data-t="150" data-n="D6 雪上活動" checked><span>加入我的初稿</span></div></div>
+</div></div>
+<div class="plan" id="day5B">
+<div class="desc">D6B：暴風雪備案，場內自由日。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">全日</span><span class="badge b-spot">場內</span></div><h3>🏨 Tomamu自由日（雲海/霧冰二刷）</h3><div class="sub">冬季雲海率高，早起拼一次</div><div class="dur">全日</div><div class="pick"><input type="checkbox" data-t="300" data-n="D6B 自由日" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab6"></div>
+<div class="plan" id="day6">
+<div class="desc">D7：Tomamu預備日。備選帶廣日歸（豚丼＋六花亭本店，約2小時車程），投票決定。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">10:00–16:00</span><span class="badge b-food">備選</span><button class="ibtn" onclick="this.closest('.stop').classList.toggle('open')">i</button></div><h3>🐷 帶廣日歸（豚丼ぱんちょう＋六花亭本店）</h3><div class="sub">來回約4小時車程，要去就早出發</div><div class="dur">6小時</div><div class="detail">ぱんちょう排隊名物；六花亭本店限定多。或改場內滑雪。</div><div class="pick"><input type="checkbox" data-t="360" data-n="D7 帶廣備選"><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab7"></div>
+<div class="plan" id="day7">
+<div class="desc">D8：11:00退房→登別（約2小時）。雪見露天＋地獄谷夜燈。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">15:00–18:00</span><span class="badge b-spot">溫泉</span></div><h3>♨️ 登別地獄谷＋第一瀧本館</h3><div class="sub">雪見露天＋鬼花火（冬季週末限定先查）</div><div class="dur">3小時</div><div class="pick"><input type="checkbox" data-t="180" data-n="D8 登別溫泉" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab8"></div>
+<div class="plan" id="day8">
+<div class="desc">D9：登別→支笏湖→札幌。冰濤祭檔期待查，最後採買夜。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">10:00–12:00</span><span class="badge b-spot">湖景</span></div><h3>🧊 支笏湖＋冰濤祭（檔期待查）</h3><div class="sub">回札幌順路，有祭賺到</div><div class="dur">2小時</div><div class="pick"><input type="checkbox" data-t="120" data-n="D9 支笏湖" checked><span>加入我的初稿</span></div></div>
+<div class="stop"><div class="row1"><span class="time">18:00–21:00</span><span class="badge b-shop">購物</span></div><h3>🛍 札幌最後採買（貍小路＋唐吉訶德）</h3><div class="sub">Royce/六花亭補齊＋藥妝</div><div class="dur">3小時</div><div class="pick"><input type="checkbox" data-t="180" data-n="D9 最後採買" checked><span>加入我的初稿</span></div></div>
+</div></div>
+
+<div class="abrow" id="ab9"></div>
+<div class="plan" id="day9">
+<div class="desc">D10：新千歲→返台。機場本身就是景點，留3小時。</div>
+<div class="tl">
+<div class="stop"><div class="row1"><span class="time">09:00–12:00</span><span class="badge b-shop">機場</span></div><h3>✈️ 新千歲機場（Royce＋哆啦A夢樂園）</h3><div class="sub">生巧大量補貨＋最後一碗拉麵道場</div><div class="dur">3小時</div><div class="pick"><input type="checkbox" data-t="0" checked disabled><span>固定行程</span></div></div>
+</div></div>
+
+<div class="sheet" id="sheet"><h3>📋 我的初稿（當前頁面已勾選）</h3><ul id="mylist"></ul><p id="mytotal" style="font-weight:800;margin-top:8px"></p></div>
+<div style="text-align:center;font-size:12px;color:#999;padding:16px 0 70px">版本 20261007-aa・初步擬稿（待投票定案）</div>
+<div class="summary"><div class="grow" id="sumtxt">已選 0 項・合計 0 分</div><button id="btnCopy" onclick="copyPlan()">複製初稿</button><button id="btnPrint" onclick="showSheet()">檢視</button></div>
+<div id="nowtoast"></div>
+<script>
+var curDay=0,curPlan={1:'A',3:'A',4:'A',5:'A'};
+function visPlan(){var p='day'+curDay;if(curPlan[curDay])p+=curPlan[curDay];return p;}
+function swDay(d,el){curDay=d;document.querySelectorAll('.day').forEach(t=>t.classList.remove('on'));el.classList.add('on');refresh();}
+function swPlan(d,p,el){curPlan[d]=p;var row=document.getElementById('ab'+d);row.querySelectorAll('.ab').forEach(t=>t.classList.remove('on'));el.classList.add('on');refresh();}
+function refresh(){document.querySelectorAll('.plan').forEach(s=>s.classList.remove('on'));var v=document.getElementById(visPlan());if(v)v.classList.add('on');document.querySelectorAll('.abrow').forEach(r=>{r.classList.remove('on');r.style.display='none';});var ab=document.getElementById('ab'+curDay);if(ab&&ab.children.length){ab.classList.add('on');ab.style.display='flex';}upd();}
+function fmt(m){return Math.floor(m/60)>0?Math.floor(m/60)+'小時'+(m%60?m%60+'分':''):m+'分';}
+function upd(){var n=0,t=0;document.querySelectorAll('#'+visPlan()+' input[type=checkbox]:checked').forEach(c=>{if(c.dataset.n){n++;t+=+c.dataset.t;}});document.getElementById('sumtxt').textContent='已選 '+n+' 項・合計約 '+fmt(t)+'（不含交通緩衝）';}
+document.querySelectorAll('input[type=checkbox]').forEach(c=>c.addEventListener('change',upd));
+function cur(){var a=[];document.querySelectorAll('#'+visPlan()+' input[type=checkbox]:checked').forEach(c=>{if(c.dataset.n)a.push('・'+c.dataset.n+'（約'+fmt(+c.dataset.t)+'）');});return a;}
+function showSheet(){var a=cur();document.getElementById('mylist').innerHTML=a.length?a.map(x=>'<li>'+x+'</li>').join(''):'<li>尚未勾選</li>';var t=0;document.querySelectorAll('#'+visPlan()+' input[type=checkbox]:checked').forEach(c=>{t+=+(c.dataset.t||0);});document.getElementById('mytotal').textContent='合計體驗時間約 '+fmt(t)+'（＋交通緩衝）';document.getElementById('sheet').classList.add('on');document.getElementById('sheet').scrollIntoView({behavior:'smooth'});}
+function copyPlan(){var names=['02/12抵達札幌','02/13札幌小樽','02/14進Tomamu','02/15富良野','02/16旭川','02/17美瑛','02/18Tomamu','02/19登別','02/20返札幌','02/21返台'];var txt='【北海道初稿｜'+names[curDay]+'】\n'+cur().join('\n');navigator.clipboard.writeText(txt).then(()=>alert('已複製，可貼到記事本/LINE'));}
+function locateNowSilent(){try{var now=Date.now();var tS=Date.parse('2027-02-12T00:00:00+09:00');var line=document.getElementById('nowline');if(now<tS){var d=Math.ceil((tS-now)/86400000);line.textContent='⌛ 行程 02/12 開始，還有 '+d+' 天（Tomamu 02/14–02/19 已訂・不可取消）';return;}line.textContent='❄️ 行程期間中';}catch(e){}}
+locateNowSilent();refresh();
+</script>
+</body>
+</html>

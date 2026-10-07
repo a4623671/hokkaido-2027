@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🛡 提案審核・北海道</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#eef3f7;color:#2b2b2b;line-height:1.7}
+.topbar{background:#fff;border-bottom:1px solid #d8e0e8;padding:10px 14px;display:flex;gap:12px;align-items:center}
+.topbar a{color:#0b2a4a;text-decoration:none;font-weight:700}
+.wrap{max-width:720px;margin:0 auto;padding:20px 14px 60px}
+.lock{background:#fff;border-radius:14px;padding:26px;text-align:center}
+.lock input{border:1px solid #d8e0e8;border-radius:10px;padding:10px 14px;font-size:16px;width:220px;text-align:center}
+.lock button{border:none;border-radius:10px;padding:10px 22px;font-size:15px;font-weight:800;background:#0b2a4a;color:#fff;cursor:pointer;margin-top:10px}
+#pwmsg{font-size:13px;color:#c0392b;min-height:20px}
+.rule{background:#fff;border-radius:12px;padding:12px 16px;margin-bottom:12px;font-size:14px}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">‹ 返回入口</a><b>🛡 提案審核</b></div>
+<div class="wrap">
+<div class="lock" id="lock">
+<div style="font-weight:700;margin-bottom:8px">管理者口令</div>
+<input id="pw" type="password" autocomplete="off"><div><button onclick="unlock()">解鎖</button></div>
+<div id="pwmsg"></div>
+</div>
+<div id="app" style="display:none">
+<div class="rule"><b>開放規則</b>：只能新增（景點／餐廳／購物／伴手禮）；刪除須附理由；初稿變動先出建議書，管理者確認才改檔。</div>
+<div class="rule"><b>第一階段</b>：投票存本機（`guide.html`），提案請在群組提出，管理者手動加入 `guide.html` 的 `CARDS` 後 push。雲端投票同步為第二階段。</div>
+<div class="rule"><b>待確認事項</b>：札幌雪祭／小樽雪燈／支笏湖冰濤祭2027檔期；包車vs租車；帶廣日歸去留；旭川／美瑛／富良野三日歸全要或三選二。</div>
+<div class="rule"><a href="https://a4623671.github.io/trips-hub/">‹‹ 管理首頁</a></div>
+</div>
+<div style="text-align:center;font-size:12px;color:#999;padding:16px 0">版本 20261007-aa</div>
+</div>
+<script>
+async function unlock(){var v=document.getElementById('pw').value.trim();var h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(v));var hex=[...new Uint8Array(h)].map(function(b){return b.toString(16).padStart(2,'0');}).join('');if(hex==='79c24954807c83c719a99fa71958ad1afb7b17a2fe03d4773d383797dfcbfbf3'){sessionStorage.setItem('admin_ok','1');showApp();}else{document.getElementById('pwmsg').textContent='密碼不對';}}
+function showApp(){document.getElementById('lock').style.display='none';document.getElementById('app').style.display='block';}
+if(sessionStorage.getItem('admin_ok')==='1')showApp();
+document.getElementById('pw').addEventListener('keydown',function(e){if(e.key==='Enter')unlock();});
+</script>
+</body>
+</html>

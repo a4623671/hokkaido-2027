@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道・雪國準備事項</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#eef3f7;color:#2b2b2b;line-height:1.7}
+.topbar{background:#fff;border-bottom:1px solid #d8e0e8;padding:10px 14px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+.topbar a{color:#0b2a4a;text-decoration:none;font-weight:700}
+.topbar .sp{flex:1}
+.topbar button{border:1px solid #d8e0e8;background:#fff;border-radius:20px;padding:6px 14px;font-size:14px;cursor:pointer}
+.hero{background:linear-gradient(135deg,#0b2a4a,#1b6f9e);color:#fff;padding:20px 16px}
+.hero h1{font-size:21px}.hero p{font-size:13px;opacity:.92;margin-top:4px}
+.wrap{padding:14px 12px 60px;max-width:760px;margin:0 auto}
+.prog{background:#fff;border-radius:12px;padding:10px 14px;font-size:14px;font-weight:700;position:sticky;top:51px;z-index:9;border:1px solid #d8e0e8}
+.bar{height:8px;background:#eee;border-radius:4px;margin-top:6px;overflow:hidden}
+.bar i{display:block;height:100%;background:#1b6f9e;width:0}
+.zone{border-radius:14px;padding:4px 12px 12px;margin:14px 0;background:#fff;border:1px solid #d8e0e8}
+.zone.cold{border:2px solid #1b6f9e}
+.zone h2{font-size:18px;margin:12px 2px 10px}
+.chk{border:1px solid #d8e0e8;border-radius:12px;padding:10px 14px;margin-bottom:10px;font-size:14px;background:#fff}
+.chk label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.chk input{width:20px;height:20px;accent-color:#1b6f9e;flex:none;margin-top:3px}
+.chk.done label{color:#999;text-decoration:line-through}
+h3.st{font-size:15px;margin:14px 2px 8px;color:#0b2a4a}
+.tip{font-size:13px;background:#fff8e1;border:1px dashed #d9b53a;border-radius:10px;padding:10px 12px;margin:10px 0}
+.star{color:#b3541e;font-weight:800}
+@media print{.topbar button{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">‹ 返回入口</a><div class="sp"></div><button onclick="window.print()">🖨 列印清單</button></div>
+<div class="hero"><h1>🧳 北海道・雪國準備事項</h1><p>2027/02/12–02/21・5大人・勾選狀態存在本機</p></div>
+<div class="wrap">
+<div class="prog"><span id="ptxt">準備進度 0/0</span><div class="bar"><i id="pbar"></i></div></div>
+<div class="zone cold"><h2>❄️ 雪國專區 <span class="star">★必備</span></h2>
+<h3 class="st">防寒衣物</h3>
+<div class="chk"><label><input type="checkbox"><span><b>防風防水外套＋中層刷毛衣</b>：2月道央均溫約-8～-3°C，體感再低5度。洋蔥式穿法，室內暖氣強要好穿脫。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>防水雪靴（高筒＋防滑底）</b>：札幌薄野冰面＋Tomamu粉雪通用。市區可另備冰爪套（¥1,000上下，唐吉訶德有）。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>毛帽＋圍巾＋防水手套＋暖暖包</b>：霧冰平台與夜間冰村體感-15°C以下，手機會凍關機，備暖包貼手機。</span></label></div>
+<h3 class="st">證件與住宿</h3>
+<div class="chk"><label><input type="checkbox"><span><b>護照＋ESTA無需（日本免簽）</b>：效期6個月以上。RISONARE Tomamu訂房確認單列印（02/14–02/19・5晚5位・¥1,067,750・不可取消）。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>信用卡2張＋現金</b>：Tomamu已付大頭，現地包車/餐飲多可刷卡，鄉下小店備現金。</span></label></div>
+<h3 class="st">交通</h3>
+<div class="chk"><label><input type="checkbox"><span><b>包車/租車二選一先定案</b>：5大人＋雪具，租車需雪胎＋4WD＋異地還車費；包車Alphard級約1台可坐（行李另計）。暴風雪JR運休是常態，自駕/包車優先。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>航班延誤備案</b>：2月新千歲除雪延誤常見，去程首晚札幌飯店選可免費取消，回程留3小時以上轉機緩衝。</span></label></div>
+</div>
+<div class="zone"><h2>🧳 通用區</h2>
+<div class="chk"><label><input type="checkbox"><span><b>常備藥＋處方箋影本</b>：感冒藥、腸胃藥、暈車藥（山路＋雪路）。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>行動電源＋轉接頭</b>：低溫掉電快，兩顆起跳。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>保濕＋護唇膏</b>：室內暖氣＋室外乾冷，乳液必備。</span></label></div>
+<div class="chk"><label><input type="checkbox"><span><b>伴手禮清單</b>：白色戀人、六花亭、Royce、夕張哈密瓜果凍（見討論區投票）。</span></label></div>
+</div>
+<div style="text-align:center;font-size:12px;color:#999;padding:16px 0 40px">版本 20261007-aa</div>
+</div>
+<script>
+function upd(){var c=document.querySelectorAll('input[type=checkbox]');var d=0;document.querySelectorAll('.chk').forEach(function(b){var i=b.querySelector('input');b.classList.toggle('done',i.checked);if(i.checked)d++;});document.getElementById('ptxt').textContent='準備進度 '+d+'/'+c.length;document.getElementById('pbar').style.width=(c.length?d/c.length*100:0)+'%';try{localStorage.setItem('hokkaido_prep_v1',JSON.stringify(Array.prototype.map.call(c,function(x){return x.checked?1:0;})));}catch(e){}}
+document.querySelectorAll('input[type=checkbox]').forEach(function(c){c.addEventListener('change',upd);});
+try{var s=JSON.parse(localStorage.getItem('hokkaido_prep_v1')||'[]');document.querySelectorAll('input[type=checkbox]').forEach(function(c,i){if(s[i])c.checked=true;});}catch(e){}
+upd();
+</script>
+</body>
+</html>

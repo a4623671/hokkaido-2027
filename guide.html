@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道討論區・投票選出最想去的店和景點</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:#eef3f7;color:#2b2b2b;line-height:1.6}
+.topbar{background:#fff;border-bottom:1px solid #d8e0e8;padding:10px 14px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:10}
+.topbar a{color:#0b2a4a;text-decoration:none;font-weight:700}
+.tabs{display:flex;gap:8px;padding:10px 12px;background:#fff;overflow-x:auto;position:sticky;top:51px;z-index:9}
+.tab{flex:none;border:1px solid #d8e0e8;border-radius:16px;padding:6px 14px;font-size:14px;background:#fff;cursor:pointer}
+.tab.on{background:#0b2a4a;color:#fff;font-weight:700}
+.wrap{padding:12px;max-width:760px;margin:0 auto 60px}
+.card{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.card h3{font-size:16px}.card .sub{font-size:13px;color:#666;margin:2px 0 8px}
+.vote{display:flex;gap:8px;align-items:center}
+.vote button{border:1px solid #1b6f9e;background:#fff;color:#1b6f9e;border-radius:16px;padding:5px 16px;font-size:14px;font-weight:700;cursor:pointer}
+.vote button.on{background:#1b6f9e;color:#fff}
+.vote .cnt{font-size:13px;color:#555}
+.top3{background:#fff8e1;border:1px dashed #d9b53a;border-radius:12px;padding:10px 14px;margin:0 0 12px;font-size:14px}
+.gate{background:#fff;border-radius:14px;padding:22px;text-align:center;margin:20px 12px}
+.gate input{border:1px solid #d8e0e8;border-radius:10px;padding:10px 14px;font-size:16px;width:200px;text-align:center}
+.gate button{border:none;border-radius:10px;padding:10px 22px;font-size:15px;font-weight:800;background:#0b2a4a;color:#fff;cursor:pointer;margin-top:10px}
+.namelist{margin-top:8px}.namelist button{border:1px solid #d8e0e8;background:#f4f7fa;border-radius:12px;padding:4px 12px;font-size:13px;margin:2px;cursor:pointer}
+.note{font-size:12px;color:#888;margin:10px 2px}
+</style>
+</head>
+<body>
+<div class="topbar"><a href="index.html">‹ 返回入口</a><b>💬 北海道討論區</b><span id="who" style="margin-left:auto;font-size:13px;color:#666"></span></div>
+<div class="gate" id="gate"><div style="font-weight:700;margin-bottom:8px">先寫名字再投票</div><input id="nameInput" maxlength="12" placeholder="你的名字"><div><button onclick="enter()">進入</button></div><div class="namelist" id="knownNames"></div></div>
+<div id="app" style="display:none">
+<div class="tabs" id="tabs"></div>
+<div class="wrap"><div class="top3" id="top3"></div><div id="cards"></div>
+<div class="note">第一階段投票存本機（跨裝置同步第二階段接雲端）。提案請直接在群組提出，管理者彙整後加入。</div>
+<div style="text-align:center;font-size:12px;color:#999;padding:16px 0 40px">版本 20261007-aa</div></div>
+</div>
+<script>
+var AREAS=[['sapporo','札幌'],['otaru','小樽'],['furano','富良野・美瑛'],['asahikawa','旭川'],['noboribetsu','登別・支笏湖'],['souv','伴手禮']];
+var CARDS=[
+{id:'h-sapporo-0',a:'sapporo',t:'札幌雪祭（大通會場）',s:'02月上旬・2027檔期未公告，行程02/12起可能銜接尾巴，出發前複查'},
+{id:'h-sapporo-1',a:'sapporo',t:'白色戀人公園',s:'室內見學＋體驗，暴風雪日首選'},
+{id:'h-sapporo-2',a:'sapporo',t:'藻岩山夜景',s:'日本新三大夜景，纜車＋展望台'},
+{id:'h-sapporo-3',a:'sapporo',t:'二條市場＋湯咖哩（Suage/奧芝商店）',s:'海鮮丼早餐＋札幌名物湯咖哩'},
+{id:'h-sapporo-4',a:'sapporo',t:'札幌啤酒園（成吉思汗烤肉）',s:'5大人聚餐首選，需預約'},
+{id:'h-otaru-0',a:'otaru',t:'小樽運河＋雪燈之路',s:'2027檔期未公告，夜間點燈＋運河散策'},
+{id:'h-otaru-1',a:'otaru',t:'堺町通（六花亭/北菓樓/音樂盒堂）',s:'伴手禮一次買齊＋試吃'},
+{id:'h-furano-0',a:'furano',t:'精靈露台（ニングルテラス）',s:'森林小木屋夜燈，富良野必訪'},
+{id:'h-furano-1',a:'furano',t:'唯我獨尊咖哩＋富田農場（冬季版）',s:'自家烘焙咖哩＋雪中薰衣草舍'},
+{id:'h-furano-2',a:'furano',t:'美瑛青池＋聖誕樹之木',s:'冬季點燈青池＋拼布之路，自駕注意路面'},
+{id:'h-asahikawa-0',a:'asahikawa',t:'旭山動物園（企鵝散步）',s:'12月下旬–3月中旬，每日11:00/14:30兩場'},
+{id:'h-asahikawa-1',a:'asahikawa',t:'旭川拉麵村＋男山酒造',s:'青葉/山頭火系＋清酒試飲'},
+{id:'h-noboribetsu-0',a:'noboribetsu',t:'登別地獄谷＋第一瀧本館',s:'02/19退房後北上中繼，雪見露天＋溫泉'},
+{id:'h-noboribetsu-1',a:'noboribetsu',t:'支笏湖＋苔之洞門（冬季）',s:'冰濤祭通常1–2月，2027檔期待查，回札幌順路'},
+{id:'h-souv-0',a:'souv',t:'白色戀人',s:'定番，機場/市區皆有'},
+{id:'h-souv-1',a:'souv',t:'六花亭（マルセイバターサンド）',s:'小樽堺町本店限定包裝多'},
+{id:'h-souv-2',a:'souv',t:'Royce生巧克力',s:'需冷藏，新千歲機場大量補貨點'},
+{id:'h-souv-3',a:'souv',t:'夕張哈密瓜果凍＋三方六年輪蛋糕',s:'柳月定番，送禮好用'}];
+var VKEY='hokkaido_votes_v1',NKEY='hokkaido_name_v1',NLIST='hokkaido_names_v1';
+var curA='sapporo';
+function loadV(){try{return JSON.parse(localStorage.getItem(VKEY)||'{}');}catch(e){return {};}}
+function saveV(v){try{localStorage.setItem(VKEY,JSON.stringify(v));}catch(e){}}
+function me(){return localStorage.getItem(NKEY)||'';}
+function knownNames(){try{return JSON.parse(localStorage.getItem(NLIST)||'[]');}catch(e){return [];}}
+function enter(){var n=document.getElementById('nameInput').value.trim();if(!n){alert('請先寫名字');return;}localStorage.setItem(NKEY,n);var l=knownNames();if(l.indexOf(n)<0){l.push(n);try{localStorage.setItem(NLIST,JSON.stringify(l.slice(-8)));}catch(e){}}document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';paintWho();render();}
+function paintWho(){document.getElementById('who').textContent='👤 '+me();}
+function toggle(id){var v=loadV(),n=me();var arr=v[id]||[];var i=arr.indexOf(n);if(i>=0)arr.splice(i,1);else arr.push(n);if(arr.length)v[id]=arr;else delete v[id];saveV(v);render();}
+function render(){var v=loadV(),n=me();var tb=document.getElementById('tabs');tb.innerHTML='';AREAS.forEach(function(a){var b=document.createElement('button');b.className='tab'+(a[0]===curA?' on':'');b.textContent=a[1];b.onclick=function(){curA=a[0];render();};tb.appendChild(b);});var box=document.getElementById('cards');box.innerHTML='';CARDS.filter(function(c){return c.a===curA;}).forEach(function(c){var arr=v[c.id]||[];var d=document.createElement('div');d.className='card';d.innerHTML='<h3>'+c.t+'</h3><div class="sub">'+c.s+'</div><div class="vote"><button class="'+(arr.indexOf(n)>=0?'on':'')+'">👍 投票</button><span class="cnt">'+arr.length+'票'+(arr.length?'（'+arr.join('・')+'）':'')+'</span></div>';d.querySelector('button').onclick=function(){toggle(c.id);};box.appendChild(d);});var all=CARDS.map(function(c){return {t:c.t,n:(v[c.id]||[]).length};}).filter(function(x){return x.n>0;}).sort(function(a,b){return b.n-a.n;}).slice(0,3);document.getElementById('top3').innerHTML=all.length?('🏆 Top3：'+all.map(function(x,i){return (i+1)+'.'+x.t+'（'+x.n+'票）';}).join('・')):'🏆 尚無投票，快來當第一票！';}
+(function(){var l=knownNames();var box=document.getElementById('knownNames');l.forEach(function(n){var b=document.createElement('button');b.textContent=n;b.onclick=function(){document.getElementById('nameInput').value=n;enter();};box.appendChild(b);});if(me()){document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';paintWho();render();}})();
+</script>
+</body>
+</html>
